@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Xharlez Xpressions - We Create. We Deliver. We Express.</title>
+  <meta name="description" content="Empowering creatives, entrepreneurs, and businesses to thrive through innovative, high-impact solutions across design, lifestyle, agriculture, and logistics.">
+  <meta name="keywords" content="creative solutions, lifestyle services, art, photography, agro, logistics, delivery, innovation, excellence">
+
+  <!-- Tailwind CSS (kept) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root{ --accent:#0ea5a4; --muted:#94a3b8; }
+
+    /* Typography */
+    body { font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+
+    /* Page background like creative.html (dark) */
+    body { background: white; color: #000000; }
+
+    /* Glass helper */
+    .glass{
+      background: linear-gradient(180deg, rgba(253, 253, 253, 0.02), rgba(255, 255, 255, 0));
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+
+    /* Hover scale + button glow */
+    .hover-scale:hover { transform: scale(1.04); transition: transform 0.28s cubic-bezier(.2,.9,.2,1); }
+    .btn-glow:hover { box-shadow: 0 10px 30px rgba(14,165,164,0.12); transform: translateY(-3px); transition: all .25s ease; }
+
+    /* Fade in animation helper */
+    .fade-in { opacity: 0; transform: translateY(18px); transition: all .75s cubic-bezier(.2,.9,.2,1); }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* Carousel */
+    .carousel { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; overflow-x:auto; display:flex; gap:1rem; padding-bottom:0.5rem; scroll-behavior: smooth; }
+    .carousel > .item { flex: 0 0 100%; scroll-snap-align:center; }
+    @media(min-width:768px){ .carousel>.item{ flex:0 0 48%; } }
+    @media(min-width:1024px){ .carousel>.item{ flex:0 0 32%; } }
+    .carousel::-webkit-scrollbar { display: none; }
+
+    /* Header / nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: linear-gradient(180deg, rgba(58, 56, 56, 0.55), rgba(103, 105, 107, 0.35));
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+
+    /* Logo subtle float animation */
+    @keyframes floaty { 0%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} 100%{ transform: translateY(0);} }
+    .logo-float { animation: floaty 5s ease-in-out infinite; transform-origin: center; }
+    .logo-hover:hover { transform: scale(1.08); transition: transform .25s ease; }
+
+    /* Desktop dropdown tweaks */
+    .nav-dropdown { transition: opacity .22s ease, transform .22s ease; transform-origin: top right; }
+    .group:hover .nav-dropdown { opacity: 1; transform: translateY(0); visibility: visible; }
+
+    /* Mobile menu overlay - not full width on larger screens
+       but full width on small screens. */
+    #mobileMenu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 1rem;
+      width: auto;
+      min-width: 220px;
+      max-width: 360px;
+      background: rgba(6,8,12,0.85);
+      color: #dbeafe;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .45s ease, opacity .25s ease;
+      opacity: 0;
+      box-shadow: 0 12px 40px rgba(2,6,23,0.7);
+      z-index: 70;
+    }
+    #mobileMenu.open { max-height: 820px; opacity: 1; }
+
+    /* On very small screens make it full width */
+    @media (max-width: 640px){
+      #mobileMenu {
+        left: 0;
+        right: 0;
+        top: 100%;
+        width: 100%;
+        max-width: none;
+        border-radius: 0 0 12px 12px;
+      }
+      #mobileMenu .menu-inner { padding: 1rem; }
+    }
+
+    #mobileMenu a, #mobileMenu summary {
+      display:block;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      transition: all .22s ease;
+      color: inherit;
+      text-decoration: none;
+    }
+    #mobileMenu a:hover, #mobileMenu summary:hover {
+      background: rgba(14,165,164,0.06);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    details > summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] summary i { transform: rotate(180deg); transition: transform .25s ease; }
+
+    /* Improve link contrast */
+    a { color: inherit; }
+
+    /* Make sure counters are monospaced-like for stable width */
+    .counter { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<<<<<<< HEAD
+<body class="antialiased">
+
+<header>
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="flex items-center justify-between py-4">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-md bg-gradient-to-br from-slate-700 to-slate-800 text-white flex items-center justify-center font-bold logo-float logo-hover" aria-hidden="true">X</div>
+        <span class="font-semibold text-lg">Xharlez Xpressions</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-6 text-slate-200 font-medium">
+        <a href="#home" class="hover:text-white transition">Home</a>
+
+        <div class="relative group">
+          <button class="inline-flex items-center gap-2 hover:text-white transition">
+            Services <i class="fa-solid fa-chevron-down text-xs"></i>
+          </button>
+
+          <ul class="nav-dropdown absolute right-0 mt-2 w-44 bg-[#0b1220] rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-1 scale-98"
+              style="padding:.25rem; list-style:none;">
+            <li><a href="creative.html" class="block px-3 py-2 text-sm hover:bg-slate-800 rounded">Creative</a></li>
+            <li><a href="lifestyle.html" class="block px-3 py-2 text-sm hover:bg-slate-800 rounded">Lifestyle</a></li>
+            <li><a href="agro.html" class="block px-3 py-2 text-sm hover:bg-slate-800 rounded">Agro</a></li>
+            <li><a href="logistics.html" class="block px-3 py-2 text-sm hover:bg-slate-800 rounded">Logistics</a></li>
+            <li><a href="shop.html" class="block px-3 py-2 text-sm hover:bg-slate-800 rounded">Xpressions Shop</a></li>
+
+          </ul>
+=======
+<body class="landing-page">
+    <!-- Bootstrap Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">Aura Nexus</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="creative.html">Creative</a></li>
+                            <li><a class="dropdown-item" href="agro.html">Agro</a></li>
+                            <li><a class="dropdown-item" href="lifestyle.html">Lifestyle</a></li>
+                            <li><a class="dropdown-item" href="logistics.html">Logistics</a></li>
+                            <li><a class="dropdown-item" href="services.html">All Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="art-shop.html">Shop</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+>>>>>>> f5bfb4b04b6eb90cd0e33ca37c35fff09518a164
+        </div>
+
+<<<<<<< HEAD
+        <a href="services.html" class="hover:text-white transition">All services</a>
+              <a href="about.html" class="hover:text-white transition">About</a>
+</div>
+
+      <button id="mobileMenuBtn" class="md:hidden p-2 rounded-md bg-slate-800/60" aria-label="Open menu">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- mobile menu (positioned, not full width on desktop) -->
+    <div id="mobileMenu" class="">
+      <div class="menu-inner px-3 py-2">
+        <a href="#home">Home</a>
+        <details class="mt-1">
+          <summary class="flex items-center justify-between">Services <i class="fa-solid fa-chevron-down text-xs"></i></summary>
+          <div class="mt-2 pl-3 space-y-2">
+            <a href="creative.html">Creative</a>
+            <a href="lifestyle.html">Lifestyle</a>
+            <a href="agro.html">Agro</a>
+            <a href="logistics.html">Logistics</a>
+          <a href="shop.html">Xpressions Shop</a>
+          </div>
+        </details>
+       
+        <a href="services.html" class="mt-2 block">All services</a>
+       <a href="about.html" class="mt-2 block">About</a></div>
+    </div>
+  </nav>
+</header>
+
+<main id="home" class="pt-6">
+  <!-- HERO SECTION -->
+  <section class="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 fade-in">
+    <span class="px-3 py-1 rounded-full bg-[#071024] text-[color:var(--accent)] inline-flex items-center gap-2 mb-3">🎯 Excellence • Innovation • Empowerment</span>
+
+    <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+      <span>Xharlez</span>
+      <span class="text-[color:var(--accent)]"> Xpressions</span>
+    </h1>
+
+    <p class="mt-4 text-slate-300 text-lg">An Xpression of creativity Quality and services that Xpress Xcellence!</p>
+
+    <div class="mt-6 max-w-2xl">
+      <h2 class="text-xl font-semibold fade-in">CONNECTING CREATION &amp; CULTIVATION</h2>
+      <p class="mt-2 text-slate-300 fade-in">Explore the Synthesis of Art, Agro, and Modern Living</p>
+      <p class="mt-2 text-slate-300 fade-in">We integrate creative brilliance with operational efficiency across design, lifestyle, agriculture, and logistics, while fostering sustainable community development and long-term value.</p>
+
+      <a href="#features" class="inline-flex items-center mt-4 rounded-md px-4 py-2 bg-[color:var(--accent)] text-slate-900 font-semibold btn-glow">DISCOVER MORE</a>
+    </div>
+
+    <!-- STATS -->
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+      <div class="text-center">
+        <div class="text-3xl font-bold text-[color:var(--accent)] counter" data-target="1000" data-suffix="+">0</div>
+        <div class="text-sm text-slate-400 mt-1">Empowered Clients</div>
+      </div>
+
+      <div class="text-center">
+        <div class="text-3xl font-bold text-[color:var(--accent)] counter" data-target="4" data-suffix="+">0</div>
+        <div class="text-sm text-slate-400 mt-1">Innovation Divisions</div>
+      </div>
+
+      <div class="text-center">
+        <div class="text-3xl font-bold text-[color:var(--accent)] counter" data-target="24" data-suffix="/7">0</div>
+        <div class="text-sm text-slate-400 mt-1">Excellence Support</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED WORK CAROUSEL -->
+  <section id="features" class="py-12 fade-in">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h3 class="text-2xl font-semibold mb-6">Featured Work</h3>
+
+      <div class="carousel">
+        <div class="item hover-scale glass rounded-lg overflow-hidden">
+          <img src="./images/tea cup.jpg" alt="Portfolio 1" class="w-full h-56 object-cover">
+          <div class="p-4 text-slate-300">
+            <h4 class="font-semibold">Brand Identity Design</h4>
+            <p class="text-sm">Complete visual identity package for a tech startup</p>
+          </div>
+=======
+    <!-- Bootstrap Hero Section -->
+    <section id="home" class="landing-hero d-flex align-items-center min-vh-100">
+        <div class="container-fluid position-relative">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8">
+                    <div class="hero-content text-center">
+                        <div class="hero-badge mb-4">
+                            <span class="badge bg-primary fs-6 py-2 px-3">🎯 Excellence • Innovation • Empowerment</span>
+                        </div>
+                        <h1 class="hero-title display-1 fw-bold mb-4">
+                            <span class="d-block">Xharlez</span>
+                            <span class="d-block text-primary">Xpressions</span>
+                        </h1>
+                        <p class="hero-subtitle lead fs-3 mb-4">An Xpression of creativity Quality and services that Xpress Xcellence!</p>
+                        <!-- Hero description row -->
+                        <!-- Hero Section (.landing-hero) -->
+                        <section class="landing-hero">
+                            <div class="container hero-content">
+                                <h1 class="hero-title">CONNECTING CREATION &amp; CULTIVATION</h1>
+                                <p class="hero-subtitle">Explore the Synthesis of Art, Agro, and Modern Living</p>
+                        
+                                <!-- Hero Description: removed the first sentence and centered the remaining text -->
+                                <div class="hero-description text-center">
+                                    <p>We integrate creative brilliance with operational efficiency across design, lifestyle, agriculture, and logistics, while fostering sustainable community development and long-term value.</p>
+                                </div>
+                                <a href="#features" class="btn concept-cta">DISCOVER MORE</a>
+                            </div>
+                        </section>
+                        
+                        <div class="hero-stats">
+                            <div class="row text-center">
+                                <div class="col-12 col-md-4 mb-3">
+                                    <div class="stat-item">
+                                        <span class="stat-number display-4 fw-bold text-primary">1000+</span>
+                                        <span class="stat-label d-block fs-6">Empowered Clients</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 mb-3">
+                                    <div class="stat-item">
+                                        <span class="stat-number display-4 fw-bold text-primary">4</span>
+                                        <span class="stat-label d-block fs-6">Innovation Divisions</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 mb-3">
+                                    <div class="stat-item">
+                                        <span class="stat-number display-4 fw-bold text-primary">24/7</span>
+                                        <span class="stat-label d-block fs-6">Excellence Support</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+>>>>>>> f5bfb4b04b6eb90cd0e33ca37c35fff09518a164
+        </div>
+
+        <div class="item hover-scale glass rounded-lg overflow-hidden">
+          <img src="./images/weeding.jpg" alt="Portfolio 2" class="w-full h-56 object-cover">
+          <div class="p-4 text-slate-300">
+            <h4 class="font-semibold">Wedding Photography</h4>
+            <p class="text-sm">Capturing beautiful moments on the most special day</p>
+          </div>
+        </div>
+
+        <div class="item hover-scale glass rounded-lg overflow-hidden">
+          <img src="./images/3d wall.jpg" alt="Portfolio 3" class="w-full h-56 object-cover">
+          <div class="p-4 text-slate-300">
+            <h4 class="font-semibold">3D Wall Installation</h4>
+            <p class="text-sm">Modern artistic installation for corporate office</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 flex justify-center gap-3">
+        <button data-prev class="px-3 py-1 rounded bg-[#0b1220]">← Prev</button>
+        <button data-next class="px-3 py-1 rounded bg-[#0b1220]">Next →</button>
+      </div>
+    </div>
+  </section>
+
+<<<<<<< HEAD
+  <!-- CONCEPT CARDS -->
+  <section class="py-12 bg-[#061026] fade-in">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="glass rounded-lg p-6 hover-scale">
+        <h3 class="text-xl font-semibold">The Creative Pulse</h3>
+        <p class="mt-2 text-slate-300">Design, media, and experiences that resonate.</p>
+      </div>
+      <div class="glass rounded-lg p-6 hover-scale">
+        <h3 class="text-xl font-semibold">Sustainable Futures</h3>
+        <p class="mt-2 text-slate-300">Agro innovation and modern living in harmony.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-12 fade-in">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl font-semibold mb-4 text-white">Get In Touch</h2>
+      <p class="text-slate-300 mb-5">Ready to transform your business? Contact us today for a free consultation.</p>
+
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-[#071026] p-6 rounded-lg">
+          <div class="text-2xl text-[color:var(--accent)] mb-2"><i class="fas fa-phone"></i></div>
+          <h5 class="font-semibold">Call Us</h5>
+          <p class="text-slate-400">+234 704 953 8147</p>
+        </div>
+
+        <div class="bg-[#071026] p-6 rounded-lg">
+          <div class="text-2xl text-[color:var(--accent)] mb-2"><i class="fas fa-envelope"></i></div>
+          <h5 class="font-semibold">Email Us</h5>
+          <p class="text-slate-400">info@xharlezxpressions.com</p>
+        </div>
+
+        <div class="bg-[#071026] p-6 rounded-lg">
+          <div class="text-2xl text-[color:var(--accent)] mb-2"><i class="fas fa-map-marker-alt"></i></div>
+          <h5 class="font-semibold">Visit Us</h5>
+          <p class="text-slate-400">Lagos, Nigeria</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/2347049538147" class="fixed right-6 bottom-6 w-14 h-14 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-lg" target="_blank" aria-label="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+<footer class="bg-slate-800 text-white py-8 fade-in">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div>
+      <h3 class="font-bold text-lg mb-2">Xharlez Xpressions</h3>
+      <p class="text-slate-300">Professional creative services including photography, design, and artistic installations.</p>
+    </div>
+    <div>
+      <h3 class="font-bold text-lg mb-2">Quick Links</h3>
+      <ul class="space-y-1">
+        <li><a href="index.html" class="hover:text-[color:var(--accent)]">Home</a></li>
+        <li><a href="about.html" class="hover:text-[color:var(--accent)]">About</a></li>
+        <li><a href="#services" class="hover:text-[color:var(--accent)]">Services</a></li>
+        <li><a href="#contact" class="hover:text-[color:var(--accent)]">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-bold text-lg mb-2">Follow Us</h3>
+      <div class="flex gap-3">
+        <a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="text-center text-slate-400 mt-6">© 2025 Xharlez Xpressions. All rights reserved.</div>
+</footer>
+
+
+<!-- SCRIPTS -->
+<script>
+  // Mobile menu toggle
+  const mobileBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  mobileBtn?.addEventListener("click", ()=> mobileMenu.classList.toggle("open"));
+
+  // Carousel step helper (works for each section)
+  function stepCarousel(container, dir){
+    if(!container) return;
+    const w = container.offsetWidth;
+    container.scrollBy({ left: dir === 'next' ? w * 0.9 : -w * 0.9, behavior: 'smooth' });
+  }
+  document.querySelectorAll('[data-next]').forEach(btn => btn.addEventListener('click', ()=> {
+    const section = btn.closest('section');
+    const c = section?.querySelector('.carousel');
+    stepCarousel(c, 'next');
+  }));
+  document.querySelectorAll('[data-prev]').forEach(btn => btn.addEventListener('click', ()=> {
+    const section = btn.closest('section');
+    const c = section?.querySelector('.carousel');
+    stepCarousel(c, 'prev');
+  }));
+
+  // Counters with suffix support and intersection observer
+  function animateCounter(el){
+    const target = parseFloat(el.getAttribute('data-target')) || 0;
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 900 + Math.min(600, target); // gentle variable timing
+    const start = performance.now();
+    function tick(now){
+      const progress = Math.min((now - start) / duration, 1);
+      const value = Math.floor(target * progress);
+      el.innerText = (value).toLocaleString() + suffix;
+      if(progress < 1) requestAnimationFrame(tick);
+      else el.innerText = target.toLocaleString() + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const counters = document.querySelectorAll('.counter');
+  const counterObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        animateCounter(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  counters.forEach(c => counterObserver.observe(c));
+
+  // Fade-in on scroll
+  const faders = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver((entries, o) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        o.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18 });
+  faders.forEach(f => io.observe(f));
+</script>
+=======
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    
+>>>>>>> f5bfb4b04b6eb90cd0e33ca37c35fff09518a164
+</body>
+</html>
