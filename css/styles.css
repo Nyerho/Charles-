@@ -1,0 +1,130 @@
+/* Remove body top margin that caused white space */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* NAVBAR */
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Desktop Menu */
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 28px;
+  height: 3px;
+  background: white;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+/* MOBILE MENU (Overlay Slide In) */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(15px);
+  padding: 100px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  transition: right 0.4s ease;
+}
+
+.mobile-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  color: var(--accent);
+}
+
+/* Mobile Animation (hamburger active) */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.mobile-menu.active {
+  right: 0;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* HERO FIX (center & no white space) */
+.hero {
+  padding-top: 120px; /* space so navbar doesn’t cover text */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

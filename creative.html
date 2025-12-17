@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Xpressions Creative - Art, Photography & Design | Xharlez Xpressions</title>
+  <meta name="description" content="Professional creative services including photography, graphic design, 3D wall art, and artistic installations. Bringing your creative vision to life with artistic excellence.">
+  <meta name="keywords" content="creative services, photography, graphic design, 3D wall art, artistic installations, professional photography, brand design">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  <style>
+    :root{ --accent:#0ea5a4; --muted:#94a3b8; }
+
+    .glass{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); backdrop-filter: blur(6px); }
+
+    .carousel { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; overflow-x:auto; display:flex; gap:1rem; padding-bottom:0.5rem; scroll-behavior: smooth; }
+    .carousel>.item { flex:0 0 100%; scroll-snap-align:center; }
+    @media(min-width:768px){ .carousel>.item{ flex:0 0 48%; } }
+    @media(min-width:1024px){ .carousel>.item{ flex:0 0 32%; } }
+
+    .service-overlay{ transition:opacity .25s ease; opacity:0; }
+    .card:hover .service-overlay{ opacity:1; }
+
+    /* Fade In Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hover Scale for Cards */
+    .hover-scale:hover {
+      transform: scale(1.05);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* Button hover glow */
+    .btn-glow:hover {
+      box-shadow: 0 0 20px rgba(14, 165, 164, 0.5);
+      transform: translateY(-2px);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .carousel::-webkit-scrollbar { display: none; }
+
+    /* Mobile menu animation */
+    #mobileMenu {
+  
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: rgba(234, 240, 240, 0.507);
+      backdrop-filter: blur(200px);
+      border-bottom-left-radius: 0.75rem;
+      border-bottom-right-radius: 0.75rem;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s ease;
+      z-index: 50;
+    }
+    #mobileMenu.open {
+      max-height: 1000px; /* large enough to fit menu */
+    }
+    #mobileMenu a, #mobileMenu summary {
+      display: block;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    #mobileMenu a:hover, #mobileMenu summary:hover {
+      background: rgba(14,165,164,0.1);
+      color: var(--accent);
+      transform: scale(1.05);
+    }
+    details > summary {
+      cursor: pointer;
+      list-style: none;
+    }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] summary i { transform: rotate(180deg); transition: transform 0.3s; }
+  </style>
+</head>
+<body class="bg-white text-slate-900">
+
+<header class="sticky top-0 z-50 bg-white/40 backdrop-blur-md shadow-sm">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    
+    <!-- TOP NAV -->
+    <div class="flex items-center justify-between py-4">
+
+      <!-- LOGO -->
+      <a href="index.html" class="text-slate-700 font-medium px-3 py-1 transition-all duration-300 
+  hover:text-[color:var(--accent)] hover:scale-110 hover:underline hover:underline-offset-4">
+        <div class="w-10 h-10 rounded-md bg-slate-800 text-white flex items-center justify-center font-bold">
+          X
+        </div>
+        <span class="font-semibold text-slate-800">Xharlez Xpressions</span>
+      </a>
+
+      <!-- DESKTOP MENU -->
+      <div class="hidden md:flex items-center gap-6 text-slate-700 font-medium">
+
+        <a href="index.html" class="hover:text-black transition">Home</a>
+
+        <!-- SERVICES DROPDOWN -->
+        <div class="relative group">
+          <button class="inline-flex items-center gap-2 hover:text-black transition">
+            Services
+            <i class="fa-solid fa-chevron-down text-xs"></i>
+          </button>
+
+          <!-- DROPDOWN -->
+          <ul class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible 
+                     group-hover:opacity-100 group-hover:visible transition-all backdrop-blur-lg">
+            <li><a href="creative.html" class="block px-4 py-2 hover:bg-slate-100">Xpressions Creative</a></li>
+            <li><a href="lifestyle.html" class="block px-4 py-2 hover:bg-slate-100">Xpressions Lifestyle</a></li>
+            <li><a href="agro.html" class="block px-4 py-2 hover:bg-slate-100">Xpressions Agro</a></li>
+            <li><a href="logistics.html" class="block px-4 py-2 hover:bg-slate-100">Xpressions Logistics</a></li>
+            <li><a href="shop.html" class="block px-4 py-2 hover:bg-slate-100">Xpressions Shop </a></li>
+
+          </ul>
+        </div>
+
+        <a href="about.html" class="hover:text-black transition">About</a>
+<a href="services.html" class="hover:text-black transition">All services</a>
+      </div>
+
+      <!-- MOBILE BUTTON -->
+      <button id="mobileMenuBtn" class="md:hidden p-2 rounded-md bg-white/60 backdrop-blur-xl shadow">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="md:hidden">
+      <div class="flex flex-col space-y-2 px-4 py-4 text-slate-800">
+        <a href="index.html">Home</a>
+        <details class="group">
+          <summary class="flex items-center justify-between">
+            Services
+            <i class="fa-solid fa-chevron-down text-xs"></i>
+          </summary>
+          <div class="mt-2 pl-4 space-y-2">
+            <a href="creative.html">Xpressions Creative</a>
+            <a href="lifestyle.html">Xpressions Lifestyle</a>
+            <a href="agro.html">Xpressions Agro</a>
+            <a href="logistics.html">Xpressions Logistics</a>
+            <a href="shop.html">Xpressions Shop</a>
+
+          </div>
+        </details>
+        <a href="./services.html">All services</a>
+              <a href="about.html">About</a>
+</div>
+    </div>
+
+  </nav>
+</header>
+
+<!-- MOBILE MENU SCRIPT -->
+<script>
+const mobileBtn = document.getElementById("mobileMenuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+mobileBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("open");
+});
+</script>
+
+<main class="pt-6">
+<!-- HERO SECTION --><section class="min-h-[60vh] bg-gradient-to-b from-slate-50 to-white flex items-center justify-center">
+  <div class="max-w-4xl mx-auto px-4 text-center py-16">
+    
+    <div class="mb-3">
+      <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm inline-flex items-center gap-2">
+        <i class="fas fa-palette text-[color:var(--accent)]"></i> Creative Excellence
+      </span>
+    </div>
+
+    <h1 class="text-4xl font-extrabold mb-4">Xpressions Creative</h1>
+    
+    <p class="text-lg text-slate-600 mb-8">
+      Transforming visions into stunning visual realities through professional photography, innovative design, and artistic installations that captivate and inspire.
+    </p>
+
+    <div class="grid grid-cols-3 gap-4 text-center">
+      <div>
+        <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="500" data-suffix="+">0</div>
+        <div class="text-sm text-slate-500">Projects Completed</div>
+      </div>
+      <div>
+<div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="15" data-suffix="+">0</div>
+        <div class="text-sm text-slate-500">Awards Won</div>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="98" data-suffix="%">0</div>
+        <div class="text-sm text-slate-500">Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</section>  
+<section style="margin-top: -50px;">
+<div class="flex justify-center gap-3 mt-6">
+  <a href="#services" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[color:var(--accent)] text-white font-semibold btn-glow">
+    <i class="fas fa-eye"></i> View Portfolio
+  </a>
+  <a href="#contact" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-200 btn-glow">
+    <i class="fas fa-phone"></i> Get Quote
+  </a>
+</div></section>
+
+  <!-- hero image carousel -->
+  <div class="rounded-lg overflow-hidden glass shadow-lg fade-in">
+    <div class="carousel p-4" aria-roledescription="carousel" tabindex="0">
+      <div class="item hover-scale">
+        <img src="./images/christian-wiediger-1SuvI_ePhVw-unsplash (1).jpg" alt="Creative Services" class="w-full h-64 object-cover rounded-md">
+      </div>
+      <div class="item hover-scale">
+        <img src="./images/decor.jpg" alt="Creative Services 2" class="w-full h-64 object-cover rounded-md">
+      </div>
+      <div class="item hover-scale">
+        <img src="./images/decor1.jpg" alt="Creative Services 3" class="w-full h-64 object-cover rounded-md">
+      </div>
+    </div>
+
+    <div class="p-4 flex justify-between">
+      <button data-prev class="px-3 py-1 rounded bg-slate-100 btn-glow">Prev</button>
+      <button data-next class="px-3 py-1 rounded bg-slate-100 btn-glow">Next</button>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="services" class="py-12 fade-in">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-700">Our Expertise</span>
+      <h2 class="text-3xl font-extrabold mt-4">Creative Services</h2>
+      <p class="text-slate-600 mt-2">Professional creative solutions that bring your vision to life</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Service 1 -->
+      <article class="card bg-white rounded-lg shadow p-4 border hover-scale fade-in">
+        <div class="relative overflow-hidden rounded-md">
+          <img src="./images/photo.jpg" alt="Professional Photography" class="w-full h-40 object-cover">
+          <div class="absolute inset-0 flex items-center justify-center service-overlay bg-[color:var(--accent)]/70 text-white opacity-0"></div>
+        </div>
+        <div class="p-4">
+          <div class="text-[color:var(--accent)] mb-2"><i class="fas fa-camera"></i></div>
+          <h3 class="font-semibold text-lg">Professional Photography</h3>
+          <p class="text-slate-600 mt-2">Capturing life's precious moments with artistic flair and technical precision. From portraits to events, we create images that tell your story.</p>
+          <ul class="mt-3 text-slate-600 list-none space-y-1">
+            <li>Portrait Photography</li>
+            <li>Event Coverage</li>
+            <li>Product Photography</li>
+            <li>Commercial Shoots</li>
+          </ul>
+          <div class="mt-4 flex items-baseline justify-between">
+            <div class="text-slate-500">Starting from</div>
+            <div class="text-2xl font-bold text-[color:var(--accent)]">₦25,000</div>
+          </div>
+          <a href="#contact" class="block mt-4 text-center px-4 py-2 rounded-md bg-[color:var(--accent)] text-white btn-glow">Get Quote</a>
+        </div>
+      </article>
+
+      <!-- Service 2 -->
+      <article class="card bg-white rounded-lg shadow p-4 border hover-scale fade-in">
+        <div class="relative overflow-hidden rounded-md">
+          <img src="./images/desss.jpg" alt="Graphic Design" class="w-full h-40 object-cover">
+          <div class="absolute inset-0 flex items-center justify-center service-overlay bg-[color:var(--accent)]/70 text-white opacity-0"></div>
+        </div>
+        <div class="p-4">
+          <div class="text-[color:var(--accent)] mb-2"><i class="fas fa-paint-brush"></i></div>
+          <h3 class="font-semibold text-lg">Graphic Design</h3>
+          <p class="text-slate-600 mt-2">Creating compelling visual identities and marketing materials that communicate your brand message effectively and memorably.</p>
+          <ul class="mt-3 text-slate-600 space-y-1">
+            <li>Logo Design</li>
+            <li>Brand Identity</li>
+            <li>Marketing Materials</li>
+            <li>Digital Graphics</li>
+          </ul>
+          <div class="mt-4 flex items-baseline justify-between">
+            <div class="text-slate-500">Starting from</div>
+            <div class="text-2xl font-bold text-[color:var(--accent)]">₦15,000</div>
+          </div>
+          <a href="#contact" class="block mt-4 text-center px-4 py-2 rounded-md bg-[color:var(--accent)] text-white btn-glow">Get Quote</a>
+        </div>
+      </article>
+
+      <!-- Service 3 -->
+      <article class="card bg-white rounded-lg shadow p-4 border hover-scale fade-in">
+        <div class="relative overflow-hidden rounded-md">
+          <img src="./images/3 d wall.jpg" alt="3D Wall Art" class="w-full h-40 object-cover">
+          <div class="absolute inset-0 flex items-center justify-center service-overlay bg-[color:var(--accent)]/70 text-white opacity-0"></div>
+        </div>
+        <div class="p-4">
+          <div class="text-[color:var(--accent)] mb-2"><i class="fas fa-cube"></i></div>
+          <h3 class="font-semibold text-lg">3D Wall Art</h3>
+          <p class="text-slate-600 mt-2">Transform your spaces with stunning three-dimensional wall installations that add depth, character, and artistic sophistication to any environment.</p>
+          <ul class="mt-3 text-slate-600 space-y-1">
+            <li>Custom Installations</li>
+            <li>Artistic Sculptures</li>
+            <li>Interior Design</li>
+            <li>Commercial Spaces</li>
+          </ul>
+          <div class="mt-4 flex items-baseline justify-between">
+            <div class="text-slate-500">Starting from</div>
+            <div class="text-2xl font-bold text-[color:var(--accent)]">₦50,000</div>
+          </div>
+          <a href="#contact" class="block mt-4 text-center px-4 py-2 rounded-md bg-[color:var(--accent)] text-white btn-glow">Get Quote</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO SECTION -->
+<section class="py-12 bg-slate-50 fade-in">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-extrabold">Our Portfolio</h2>
+      <p class="text-slate-600 mt-2">A selection of our recent projects showcasing our creative expertise</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <img src="./images/wall.jpg" class="rounded-lg hover-scale" alt="Portfolio 1">
+      <img src="./images/weeding11.jpg" class="rounded-lg hover-scale" alt="Portfolio 2">
+      <img src="./images/3d wall.jpg" class="rounded-lg hover-scale" alt="Portfolio 3">
+      
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="py-12 bg-[color:var(--accent)] text-white fade-in">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-extrabold mb-4">Ready to bring your vision to life?</h2>
+    <p class="mb-6">Let’s work together to create something amazing that truly represents your brand and creativity.</p>
+    <a href="https://wa.me/2347049538147" class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-white text-[color:var(--accent)] font-semibold btn-glow">
+      <i class="fas fa-paper-plane"></i> Contact Us
+    </a>
+  </div>
+</section>
+<section id="contact" class="py-12 bg-[color:var(--accent)] text-white fade-in"style="margin-top: 10px; margin-bottom: 10px;">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-semibold mb-4 text-white">Get In Touch</h2>
+        <p class="lead text-slate-300 mb-5">Ready to transform your business? Contact us today for a free consultation.</p>
+
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-slate-800 p-6 rounded-lg">
+            <div class="text-2xl text-[color:var(--accent)] mb-2"><i class="fas fa-phone"></i></div>
+            <h5 class="font-semibold">Call Us</h5>
+            <p class="text-slate-400">+234 704 953 8147</p>
+          </div>
+          <div class="bg-slate-800 p-6 rounded-lg">
+            <div class="text-2xl text-[color:var(--accent)] mb-2"><i class="fas fa-envelope"></i></div>
+            <h5 class="font-semibold">Email Us</h5>
+            <p class="text-slate-400">info@xharlezxpressions.com</p>
+          </div>
+          <div class="bg-slate-800 p-6 rounded-lg">
+            <div class="text-2xl text-[color:var(--accent)] mb-2"><i class="fas fa-map-marker-alt"></i></div>
+            <h5 class="font-semibold">Visit Us</h5>
+            <p class="text-slate-400">Lagos, Nigeria</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- CONTACT SECTION -->
+
+</section>
+ <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/2347049538147" class="fixed right-6 bottom-6 rounded-full w-14 h-14 flex items-center justify-center bg-emerald-500 text-white whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+<!-- FOOTER -->
+<footer class="bg-slate-800 text-white py-8 fade-in">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div>
+      <h3 class="font-bold text-lg mb-2">Xharlez Xpressions</h3>
+      <p class="text-slate-300">Professional creative services including photography, design, and artistic installations.</p>
+    </div>
+    <div>
+      <h3 class="font-bold text-lg mb-2">Quick Links</h3>
+      <ul class="space-y-1">
+        <li><a href="index.html" class="hover:text-[color:var(--accent)]">Home</a></li>
+        <li><a href="about.html" class="hover:text-[color:var(--accent)]">About</a></li>
+        <li><a href="#services" class="hover:text-[color:var(--accent)]">Services</a></li>
+        <li><a href="#contact" class="hover:text-[color:var(--accent)]">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-bold text-lg mb-2">Follow Us</h3>
+      <div class="flex gap-3">
+        <a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="text-center text-slate-400 mt-6">© 2025 Xharlez Xpressions. All rights reserved.</div>
+</footer>
+
+<script>
+function animateCounters() {
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => {
+    const target = parseFloat(counter.getAttribute('data-target'));
+    const suffix = counter.getAttribute('data-suffix') || "";
+    const duration = 1200; 
+    const startTime = performance.now();
+    function update(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const current = target * progress;
+      counter.innerText = Math.floor(current) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounters();
+      observer.disconnect();
+    }
+  });
+}, { threshold: 0.4 });
+
+document.querySelectorAll(".counter").forEach(c => observer.observe(c));
+
+// Fade-in on scroll
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+  entries.forEach(entry => {
+    if(!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+  });
+}, appearOptions);
+faders.forEach(fader => appearOnScroll.observe(fader));
+
+// Carousel step
+function stepCarousel(container, dir){
+  const w = container.offsetWidth;
+  if(dir === 'next') container.scrollBy({left: w*0.9, behavior: 'smooth'});
+  else container.scrollBy({left: -w*0.9, behavior: 'smooth'});
+}
+document.querySelectorAll('[data-next]').forEach(btn => btn.addEventListener('click', ()=> {
+  const c = btn.closest('.glass')?.querySelector('.carousel');
+  if(c) stepCarousel(c,'next');
+}));
+document.querySelectorAll('[data-prev]').forEach(btn => btn.addEventListener('click', ()=> {
+  const c = btn.closest('.glass')?.querySelector('.carousel');
+  if(c) stepCarousel(c,'prev');
+}));
+</script>
+
+</body>
+</html>

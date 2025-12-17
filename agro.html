@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Xpressions Agro - Sustainable Farming Solutions | Xharlez Xpressions</title>
+<meta name="description" content="Sustainable farming solutions, organic products, and agricultural consulting services from Xpressions Agro.">
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root{--accent:#0ea5a4;--muted:#94a3b8;}
+body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:white;color:#1e293b;}
+
+.glass{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px);}
+.hover-scale:hover{transform: scale(1.05);transition: transform 0.3s ease-in-out;}
+.btn-glow:hover{box-shadow:0 0 20px rgba(14,165,164,0.5);transform: translateY(-2px);transition: all 0.3s ease-in-out;}
+.fade-in{opacity:0;transform: translateY(20px);transition: all 0.8s ease-out;}
+.fade-in.visible{opacity:1;transform: translateY(0);}
+
+.carousel{scroll-snap-type: x mandatory;-webkit-overflow-scrolling: touch;overflow-x:auto;display:flex;gap:1rem;padding-bottom:0.5rem;scroll-behavior: smooth;}
+.carousel>.item{flex:0 0 100%;scroll-snap-align:center;}
+@media(min-width:768px){.carousel>.item{flex:0 0 48%;}}
+@media(min-width:1024px){.carousel>.item{flex:0 0 32%;}}
+.carousel::-webkit-scrollbar{display:none;}
+
+#mobileMenu{top:100%;left:0;width:100%;background:rgba(234,240,240,0.507);backdrop-filter: blur(200px);overflow:hidden;max-height:0;transition: max-height 0.5s ease;z-index:50;border-bottom-left-radius:.75rem;border-bottom-right-radius:.75rem;}
+#mobileMenu.open{max-height:1000px;}
+#mobileMenu a, #mobileMenu summary{display:block;padding:0.75rem 1rem;border-radius:0.5rem;transition: all 0.3s ease;}
+#mobileMenu a:hover, #mobileMenu summary:hover{background: rgba(14,165,164,0.1); color: var(--accent); transform: scale(1.05);}
+details>summary{cursor:pointer;list-style:none;}
+details>summary::-webkit-details-marker{display:none;}
+details[open] summary i{transform: rotate(180deg);transition: transform 0.3s;}
+</style>
+</head>
+<body class="bg-white text-slate-900">
+
+<header class="sticky top-0 z-50 bg-white/40 backdrop-blur-md shadow-sm">
+<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="flex items-center justify-between py-4">
+<a href="index.html" class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-md bg-slate-800 text-white flex items-center justify-center font-bold">X</div>
+<span class="font-semibold text-lg text-slate-800">Xharlez Xpressions</span>
+</a>
+
+<div class="hidden md:flex items-center gap-6 text-slate-700 font-medium">
+<a href="index.html" class="hover:text-black transition">Home</a>
+<div class="relative group">
+<button class="inline-flex items-center gap-2 hover:text-black transition">Services <i class="fa-solid fa-chevron-down text-xs"></i></button>
+<ul class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all backdrop-blur-lg">
+<li><a href="creative.html" class="block px-4 py-2 hover:bg-slate-100">Xpressions Creative</a></li>
+<li><a href="lifestyle.html" class="block px-4 py-2 hover:bg-slate-100">Xpressions Lifestyle</a></li>
+<li><a href="agro.html" class="block px-4 py-2 hover:bg-slate-100">Xpressions Agro</a></li>
+<li><a href="logistics.html" class="block px-4 py-2 hover:bg-slate-100">Xpressions Logistics</a></li>
+<li><a href="shop.html" class="block px-4 py-2 hover:bg-slate-100">Xpressions Shop</a></li>
+
+</ul>
+</div>
+<a href="services.html" class="hover:text-black transition">All services</a>
+<a href="about.html" class="hover:text-black transition">About</a>
+</div>
+
+<button id="mobileMenuBtn" class="md:hidden p-2 rounded-md bg-white/60 backdrop-blur-xl shadow">
+<i class="fa-solid fa-bars text-xl"></i>
+</button>
+</div>
+
+<div id="mobileMenu" class="md:hidden">
+<a href="index.html">Home</a>
+<details>
+<summary>Services <i class="fa-solid fa-chevron-down text-xs"></i></summary>
+<div class="pl-4 space-y-2">
+<a href="creative.html">Xpressions Creative</a>
+<a href="lifestyle.html">Xpressions Lifestyle</a>
+<a href="agro.html">Xpressions Agro</a>
+<a href="logistics.html">Xpressions Logistics</a>
+<a href="shop.html">Xpressions Shop</a>
+</div>
+</details>
+<a href="services.html">All services</a>
+<a href="about.html">About</a>
+</div>
+</nav>
+</header>
+
+<main class="pt-6">
+<!-- HERO SECTION -->
+ 
+<section class="min-h-[60vh] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 to-white fade-in">
+  <div class="max-w-4xl mx-auto">
+    
+    <div class="mb-4 flex justify-center">
+      <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm inline-flex items-center gap-2" style="margin-top: 30px; margin-bottom: -15px;">
+        <i class="fas fa-palette text-[color:var(--accent)]"></i> Agricultural Excellence
+      </span>
+    </div>
+
+    <h1 class="text-4xl font-extrabold mb-3">Xpressions <span class="text-[color:var(--accent)]">Agro</span></h1>
+    
+    <p class="text-lg text-slate-600 mb-6">Sustainable farming solutions that nurture crops and communities while protecting our environment.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      <div>
+        <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="200" data-suffix="+">0</div>
+        <div class="text-sm text-slate-500">Farmers Trained</div>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="95" data-suffix="%">0</div>
+        <div class="text-sm text-slate-500">Waste Reduction</div>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="100" data-suffix="+">0</div>
+        <div class="text-sm text-slate-500">Organic Methods</div>
+      </div>
+    </div>
+
+    <div class="flex justify-center gap-3">
+      <a href="#services" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[color:var(--accent)] text-white btn-glow">Explore Services</a>
+      <a href="#products" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-[color:var(--accent)] text-[color:var(--accent)] btn-glow">Our Products</a>
+    </div>
+
+  </div>
+</section>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="services" class="py-12 fade-in">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-10">
+<span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-700">Our Expertise</span>
+<h2 class="text-3xl font-extrabold mt-4">Agricultural Services</h2>
+<p class="text-slate-600 mt-2">Comprehensive solutions for modern sustainable farming</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass p-6 rounded-lg hover-scale text-center fade-in border shadow">
+<i class="fas fa-tractor text-[color:var(--accent)] text-3xl mb-3"></i>
+<h4 class="font-semibold mb-2">Farm Consulting</h4>
+<p class="text-slate-500 text-sm">Expert guidance on crop selection, soil management, and sustainable farming practices.</p>
+</div>
+<div class="glass p-6 rounded-lg hover-scale text-center fade-in border shadow">
+<i class="fas fa-leaf text-[color:var(--accent)] text-3xl mb-3"></i>
+<h4 class="font-semibold mb-2">Organic Products</h4>
+<p class="text-slate-500 text-sm">Fresh, organic produce grown using eco-friendly methods.</p>
+</div>
+<div class="glass p-6 rounded-lg hover-scale text-center fade-in border shadow">
+<i class="fas fa-seedling text-[color:var(--accent)] text-3xl mb-3"></i>
+<h4 class="font-semibold mb-2">Training Programs</h4>
+<p class="text-slate-500 text-sm">Training for farmers on modern agricultural techniques and sustainability.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PRODUCTS SECTION -->
+<section id="products" class="py-12 fade-in">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-10">
+<h2 class="text-3xl font-extrabold">Our Products</h2>
+<p class="text-slate-600 mt-2">Fresh, organic, and sustainably grown</p>
+</div>
+
+<div class="glass rounded-lg overflow-hidden shadow-lg">
+<div class="carousel p-4">
+<div class="item hover-scale text-center">
+<img src="./images/fruits.jpg" class="w-full h-48 object-cover rounded-md mb-2">
+<p class="text-slate-700 font-semibold">Vegetables</p>
+</div>
+<div class="item hover-scale text-center">
+<img src="./images/grains.jpg" class="w-full h-48 object-cover rounded-md mb-2">
+<p class="text-slate-700 font-semibold">Grains</p>
+</div>
+<div class="item hover-scale text-center">
+<img src="./images/fruit1.jpg" class="w-full h-48 object-cover rounded-md mb-2">
+<p class="text-slate-700 font-semibold">Fruits</p>
+</div>
+<div class="item hover-scale text-center">
+<img src="./images/spices.jpg" class="w-full h-48 object-cover rounded-md mb-2">
+<p class="text-slate-700 font-semibold">Spices</p>
+</div>
+</div>
+
+<div class="flex justify-between p-4">
+<button data-prev class="px-3 py-1 rounded bg-slate-100 btn-glow">Prev</button>
+<button data-next class="px-3 py-1 rounded bg-slate-100 btn-glow">Next</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="py-12 bg-[color:var(--accent)] text-white fade-in">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<h2 class="text-2xl font-semibold mb-4">Get In Touch</h2>
+<p class="text-slate-200 mb-5">Ready to transform your farming? Contact us today!</p>
+
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-slate-800 p-6 rounded-lg">
+<div class="text-2xl text-[color:var(--accent)] mb-2"><i class="fas fa-phone"></i></div>
+<h5 class="font-semibold">Call Us</h5>
+<p class="text-slate-400">+234 704 953 8147</p>
+</div>
+<div class="bg-slate-800 p-6 rounded-lg">
+<div class="text-2xl text-[color:var(--accent)] mb-2"><i class="fas fa-envelope"></i></div>
+<h5 class="font-semibold">Email Us</h5>
+<p class="text-slate-400">info@xharlezxpressions.com</p>
+</div>
+<div class="bg-slate-800 p-6 rounded-lg">
+<div class="text-2xl text-[color:var(--accent)] mb-2"><i class="fas fa-map-marker-alt"></i></div>
+<h5 class="font-semibold">Visit Us</h5>
+<p class="text-slate-400">Lagos, Nigeria</p>
+</div>
+</div>
+</div>
+</section>
+
+<a href="https://wa.me/2347049538147" class="fixed right-6 bottom-6 rounded-full w-14 h-14 flex items-center justify-center bg-emerald-500 text-white whatsapp-float" target="_blank">
+<i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- FOOTER -->
+<footer class="bg-slate-800 text-white py-8 fade-in">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div>
+<h3 class="font-bold text-lg mb-2">Xharlez Xpressions</h3>
+<p class="text-slate-300">Sustainable farming and agro consulting services.</p>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-2">Quick Links</h3>
+<ul class="space-y-1">
+<li><a href="index.html" class="hover:text-[color:var(--accent)]">Home</a></li>
+<li><a href="about.html" class="hover:text-[color:var(--accent)]">About</a></li>
+<li><a href="#services" class="hover:text-[color:var(--accent)]">Services</a></li>
+<li><a href="#contact" class="hover:text-[color:var(--accent)]">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-2">Follow Us</h3>
+<div class="flex gap-3">
+<a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-facebook-f"></i></a>
+<a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-twitter"></i></a>
+<a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-instagram"></i></a>
+<a href="#" class="hover:text-[color:var(--accent)]"><i class="fab fa-linkedin-in"></i></a>
+</div>
+</div>
+</div>
+<div class="text-center text-slate-400 mt-6">© 2025 Xharlez Xpressions. All rights reserved.</div>
+</footer>
+
+<script>
+// Mobile menu toggle
+document.getElementById("mobileMenuBtn").addEventListener("click",()=>{document.getElementById("mobileMenu").classList.toggle("open");});
+
+// Counter animation
+function animateCounters(){
+  const counters=document.querySelectorAll('.counter');
+  counters.forEach(counter=>{
+    const target=parseFloat(counter.getAttribute('data-target'));
+    const suffix=counter.getAttribute('data-suffix')||"";
+    const duration=1200;
+    const startTime=performance.now();
+    function update(now){
+      const progress=Math.min((now-startTime)/duration,1);
+      const current=target*progress;
+      counter.innerText=Math.floor(current)+suffix;
+      if(progress<1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){animateCounters();observer.disconnect();}})},{threshold:0.4});
+document.querySelectorAll(".counter").forEach(c=>observer.observe(c));
+
+// Fade-in on scroll
+const faders=document.querySelectorAll('.fade-in');
+const appearOptions={threshold:0.2,rootMargin:"0px 0px -50px 0px"};
+const appearOnScroll=new IntersectionObserver(function(entries,observer){
+entries.forEach(entry=>{if(!entry.isIntersecting) return; entry.target.classList.add('visible'); observer.unobserve(entry.target);});
+},appearOptions);
+faders.forEach(fader=>appearOnScroll.observe(fader));
+
+// Carousel buttons
+function stepCarousel(container,dir){
+  const w=container.offsetWidth;
+  if(dir==='next') container.scrollBy({left:w*0.9,behavior:'smooth'});
+  else container.scrollBy({left:-w*0.9,behavior:'smooth'});
+}
+document.querySelectorAll('[data-next]').forEach(btn=>btn.addEventListener('click',()=>{const c=btn.closest('.glass')?.querySelector('.carousel');if(c) stepCarousel(c,'next');}));
+document.querySelectorAll('[data-prev]').forEach(btn=>btn.addEventListener('click',()=>{const c=btn.closest('.glass')?.querySelector('.carousel');if(c) stepCarousel(c,'prev');}));
+</script>
+</body>
+</html>
