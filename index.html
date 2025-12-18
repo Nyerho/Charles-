@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<!-- head styles -->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -346,3 +347,48 @@
 </script>
 </body>
 </html>
+
+<!-- Christmas banner (temporary) -->
+<div class="christmas-banner" style="display:none">
+    🎄 Season's Greetings from Xharlez Xpressions! Enjoy our holiday specials.
+    <button id="disableChristmas" type="button" aria-label="Hide Christmas theme">Hide</button>
+</div>
+
+<!-- Christmas theme script (temporary) -->
+<script>
+    (function () {
+        const key = 'christmas-enabled';
+        const isSet = localStorage.getItem(key);
+        if (isSet === null) localStorage.setItem(key, 'true'); // enable by default once
+
+        const enabled = localStorage.getItem(key) === 'true';
+        const banner = document.querySelector('.christmas-banner');
+
+        if (enabled) {
+            document.body.classList.add('christmas-theme');
+            if (banner) banner.style.display = 'block';
+            // Create snowflakes
+            const flakes = 24;
+            for (let i = 0; i < flakes; i++) {
+                const s = document.createElement('div');
+                s.className = 'snowflake';
+                s.textContent = '❄';
+                s.style.setProperty('--x', Math.floor(Math.random() * 100) + 'vw');
+                s.style.setProperty('--size', (10 + Math.random() * 24) + 'px');
+                s.style.setProperty('--duration', (8 + Math.random() * 12) + 's');
+                document.body.appendChild(s);
+            }
+        }
+
+        const hideBtn = document.getElementById('disableChristmas');
+        if (hideBtn) {
+            hideBtn.addEventListener('click', function () {
+                localStorage.setItem(key, 'false');
+                document.body.classList.remove('christmas-theme');
+                document.querySelectorAll('.snowflake').forEach(el => el.remove());
+                if (banner) banner.remove();
+            });
+        }
+    })();
+</script>
+</body>
