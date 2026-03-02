@@ -54,6 +54,11 @@
     }
 
     // Event: Quantity/Remove within cart modal
+    const cartModalEl = document.getElementById('cartModal');
+    if (cartModalEl) {
+        cartModalEl.addEventListener('show.bs.modal', renderCart);
+    }
+
     document.addEventListener('click', (e) => {
         const t = e.target;
         if (t.matches('button[data-action]')) {
