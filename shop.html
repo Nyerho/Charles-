@@ -1,0 +1,981 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aura Nexus — Art Shop</title>
+    <!-- Tailwind CSS (Preflight disabled to coexist with Bootstrap) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        corePlugins: {
+          preflight: false,
+        }
+      }
+    </script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Site styles -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Shop-specific styles -->
+    <link rel="stylesheet" href="css/shop.css" />
+    <style>
+        /* New Accent Color for consistency */
+        :root{ --accent:#0ea5a4; --muted:#94a3b8; }
+        
+        /* Fade in animation helper */
+        .fade-in { opacity: 0; transform: translateY(18px); transition: all .75s cubic-bezier(.2,.9,.2,1); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Mobile menu animation */
+        #mobileMenu {
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(234, 240, 240, 0.507);
+            backdrop-filter: blur(200px);
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.5s ease;
+            z-index: 50;
+        }
+        #mobileMenu.open {
+            max-height: 1000px;
+        }
+        #mobileMenu a, #mobileMenu summary {
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none; /* Override Bootstrap default */
+        }
+        #mobileMenu a:hover, #mobileMenu summary:hover {
+            background: rgba(14,165,164,0.1);
+            color: var(--accent);
+            transform: scale(1.05);
+        }
+        details > summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary i { transform: rotate(180deg); transition: transform 0.3s; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    
+    <div class="flex items-center justify-between py-4">
+
+      <a href="index.html" class="text-slate-700 font-medium px-3 py-1 transition-all duration-300 hover:text-[color:var(--accent)] hover:scale-110 hover:underline hover:underline-offset-4 flex items-center gap-2 text-decoration-none">
+        <div class="w-10 h-10 rounded-md bg-slate-800 text-white flex items-center justify-center font-bold">
+          X
+        </div>
+        <span class="font-semibold text-slate-800">Xharlez Xpressions</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-6 text-slate-700 font-medium">
+
+        <a href="index.html" class="hover:text-black transition text-decoration-none">Home</a>
+
+        <div class="relative group">
+          <button class="inline-flex items-center gap-2 hover:text-black transition bg-transparent border-0 p-0 text-slate-700 font-medium">
+            Services
+            <i class="fa-solid fa-chevron-down text-xs"></i>
+          </button>
+
+          <ul class="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 backdrop-blur-lg list-none p-0 border border-slate-100 z-50">
+            <li><a href="creative.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">Xpressions Creative</a></li>
+            <li><a href="lifestyle.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">Xpressions Lifestyle</a></li>
+            <li><a href="agro.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">Xpressions Agro</a></li>
+            <li><a href="logistics.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">Xpressions Logistics</a></li>
+            <li><a href="xpressionsnation.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">XpressionsNation (NGO)</a></li>
+            <li><a href="shop.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">Xpressions Shop</a></li>          
+          </ul>
+        </div>
+
+        <a href="services.html" class="hover:text-black transition text-decoration-none">All services</a>
+        <a href="about.html" class="text-[color:var(--accent)] transition text-decoration-none">About</a>
+        
+        <!-- Cart Button (Desktop) -->
+        <button class="relative px-4 py-2 border border-[color:var(--accent)] text-[color:var(--accent)] rounded hover:bg-[color:var(--accent)] hover:text-white transition ml-2 bg-transparent" data-bs-toggle="modal" data-bs-target="#cartModal">
+            <i class="fa-solid fa-cart-shopping mr-2"></i>Cart
+            <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full border-2 border-white">0</span>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-4 md:hidden">
+        <!-- Cart Button (Mobile) -->
+        <button class="relative p-2 text-[color:var(--accent)] bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#cartModal">
+            <i class="fa-solid fa-cart-shopping text-xl"></i>
+            <span class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-white">0</span>
+        </button>
+        <button id="mobileMenuBtn" class="p-2 rounded-md bg-white/60 backdrop-blur-xl shadow border border-slate-200">
+            <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="md:hidden">
+      <div class="flex flex-col space-y-2 px-4 py-4 text-slate-800">
+        <a href="index.html" class="text-decoration-none text-slate-800">Home</a>
+        <details class="group">
+          <summary class="flex items-center justify-between font-medium text-slate-700">
+            Services
+            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+          </summary>
+          <div class="mt-2 pl-4 space-y-2 border-l-2 border-slate-100">
+            <a href="creative.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">Xpressions Creative</a>
+            <a href="lifestyle.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">Xpressions Lifestyle</a>
+            <a href="agro.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">Xpressions Agro</a>
+            <a href="logistics.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">Xpressions Logistics</a>
+            <a href="xpressionsnation.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">XpressionsNation (NGO)</a>
+            <a href="shop.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">Xpressions Shop</a>
+          </div>
+        </details>
+        <a href="services.html" class="text-decoration-none text-slate-800">All services</a>
+        <a href="about.html" class="text-[color:var(--accent)] text-decoration-none">About</a>
+      </div>
+    </div>
+
+  </nav>
+</header>
+
+    <!-- Hero -->
+    <header class="shop-hero d-flex align-items-center">
+        <div class="container text-center">
+            <h1 class="display-5 fw-bold text-white">Explore the Art Shop</h1>
+            <p class="lead text-white-50">Limited editions, premium prints, and originals crafted to inspire.</p>
+        </div>
+    </header>
+
+    <!-- Product Grid -->
+    <main class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h4 mb-0">Featured Artworks</h2>
+            <div class="d-flex gap-2">
+                <select class="form-select form-select-sm" id="sortSelect" aria-label="Sort products">
+                    <option value="featured" selected>Featured</option>
+                    <option value="price_low_high">Price: Low to High</option>
+                    <option value="price_high_low">Price: High to Low</option>
+                </select>
+                <select class="form-select form-select-sm" id="categorySelect" aria-label="Filter category">
+                    <option value="all" selected>All</option>
+                    <option value="canvas">Canvas</option>
+                    <option value="poster">Poster</option>
+                    <option value="framed">Framed Print</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4" id="productGrid">
+
+            <!-- Product Card 1 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-001"
+                     data-title="Art Piece #1"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.25%20%283%29.jpeg"
+                             alt="Art Piece #1"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #1</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-002"
+                     data-title="Art Piece #2"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.25.jpeg"
+                             alt="Art Piece #2"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #2</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-003"
+                     data-title="Art Piece #3"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.26%20%281%29.jpeg"
+                             alt="Art Piece #3"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #3</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-004"
+                     data-title="Art Piece #4"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.26%20%282%29.jpeg"
+                             alt="Art Piece #4"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #4</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 5 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-005"
+                     data-title="Art Piece #5"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.26%20%283%29.jpeg"
+                             alt="Art Piece #5"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #5</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 6 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-006"
+                     data-title="Art Piece #6"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.26.jpeg"
+                             alt="Art Piece #6"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #6</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 7 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-007"
+                     data-title="Art Piece #7"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.27.jpeg"
+                             alt="Art Piece #7"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #7</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 8 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-008"
+                     data-title="Art Piece #8"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.05.53.jpeg"
+                             alt="Art Piece #8"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #8</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 9 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-009"
+                     data-title="Art Piece #9"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.06.24%20%281%29.jpeg"
+                             alt="Art Piece #9"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #9</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 10 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-010"
+                     data-title="Art Piece #10"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.06.24.jpeg"
+                             alt="Art Piece #10"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #10</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 11 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-011"
+                     data-title="Art Piece #11"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.06.25%20%281%29.jpeg"
+                             alt="Art Piece #11"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #11</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 12 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-012"
+                     data-title="Art Piece #12"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.06.25.jpeg"
+                             alt="Art Piece #12"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #12</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 13 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-013"
+                     data-title="Art Piece #13"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.06.26.jpeg"
+                             alt="Art Piece #13"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #13</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 14 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-014"
+                     data-title="Art Piece #14"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.24%20%281%29.jpeg"
+                             alt="Art Piece #14"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #14</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 15 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-015"
+                     data-title="Art Piece #15"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.24%20%282%29.jpeg"
+                             alt="Art Piece #15"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #15</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 16 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-016"
+                     data-title="Art Piece #16"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.24%20%283%29.jpeg"
+                             alt="Art Piece #16"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #16</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 17 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-017"
+                     data-title="Art Piece #17"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.24.jpeg"
+                             alt="Art Piece #17"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #17</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 18 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-018"
+                     data-title="Art Piece #18"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.25%20%281%29.jpeg"
+                             alt="Art Piece #18"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #18</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 19 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm product-card"
+                     data-product-id="SHOP-019"
+                     data-title="Art Piece #19"
+                     data-category="canvas">
+                    <div style="height: 300px; overflow: hidden;">
+                        <img class="card-img-top product-image w-100 h-100"
+                             src="images/shop/WhatsApp%20Image%202026-03-02%20at%2009.21.25%20%282%29.jpeg"
+                             alt="Art Piece #19"
+                             loading="lazy"
+                             style="object-fit: cover;"
+                             onerror="this.src='css/images/bgp.jpeg';" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Art Piece #19</h5>
+                        <p class="card-text flex-grow-1">
+                            <span class="text-muted text-decoration-line-through me-2">₦35,000</span>
+                            <span class="small">Premium art print.</span>
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="price fs-5 fw-bold" data-price="15000">₦15,000</span>
+                        </div>
+                        <select class="form-select form-select-sm variant-select mt-2" aria-label="Variant">
+                            <option value="std" data-variant-id="std" data-price="15000" selected>Standard (Logo) - ₦15,000</option>
+                            <option value="acr" data-variant-id="acr" data-price="25000">Acrylic - ₦25,000</option>
+                            <option value="frm" data-variant-id="frm" data-price="99000">Framed - ₦99,000</option>
+                        </select>
+                        <button class="btn btn-primary w-100 mt-3 add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2 buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="cartModalLabel" class="modal-title">Your Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartItems"></div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <strong>Total:</strong>
+                        <span id="cartTotal" class="fs-5 fw-bold">$0</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="clearCartBtn" class="btn btn-outline-danger">Clear Cart</button>
+                    <!-- Checkout triggers the details modal -->
+                    <button id="checkoutBtn" class="btn btn-primary">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Details Modal -->
+    <div class="modal fade" id="checkoutDetailsModal" tabindex="-1" aria-labelledby="checkoutDetailsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="checkoutDetailsLabel" class="modal-title">Checkout Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="checkoutForm" class="needs-validation" novalidate>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="recipientName" required />
+                                <div class="invalid-feedback">Please enter your full name.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" id="recipientEmail" required />
+                                <div class="invalid-feedback">Please enter a valid email.</div>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label">Address Line 1</label>
+                                <input type="text" class="form-control" id="recipientAddress1" required />
+                                <div class="invalid-feedback">Address is required.</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Address Line 2 (optional)</label>
+                                <input type="text" class="form-control" id="recipientAddress2" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" id="recipientCity" required />
+                                <div class="invalid-feedback">City is required.</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">State/Region</label>
+                                <input type="text" class="form-control" id="recipientState" required />
+                                <div class="invalid-feedback">State/Region is required.</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Country Code</label>
+                                <input type="text" class="form-control" id="recipientCountry" placeholder="US, GB, NG..." required />
+                                <div class="invalid-feedback">Country code is required.</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">ZIP/Postal Code</label>
+                                <input type="text" class="form-control" id="recipientZip" required />
+                                <div class="invalid-feedback">ZIP/Postal code is required.</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Phone (optional)</label>
+                                <input type="tel" class="form-control" id="recipientPhone" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Order Notes (optional)</label>
+                                <textarea class="form-control" id="orderNotes" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+                        <button id="placeOrderBtn" class="btn btn-primary" type="submit">Place Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white py-8 fade-in mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <h3 class="font-bold text-lg mb-2">Xharlez Xpressions</h3>
+          <p class="text-slate-300">Professional creative services including photography, design, and artistic installations.</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-2">Quick Links</h3>
+          <ul class="space-y-1 pl-0 list-none">
+            <li><a href="index.html" class="text-slate-300 hover:text-[color:var(--accent)] text-decoration-none transition">Home</a></li>
+            <li><a href="about.html" class="text-slate-300 hover:text-[color:var(--accent)] text-decoration-none transition">About</a></li>
+            <li><a href="xpressionsnation.html" class="text-slate-300 hover:text-[color:var(--accent)] text-decoration-none transition">XpressionsNation</a></li>
+            <li><a href="services.html" class="text-slate-300 hover:text-[color:var(--accent)] text-decoration-none transition">Services</a></li>
+            <li><a href="#contact" class="text-slate-300 hover:text-[color:var(--accent)] text-decoration-none transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-2">Follow Us</h3>
+          <div class="flex gap-3">
+            <a href="#" class="text-slate-300 hover:text-[color:var(--accent)] transition"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-slate-300 hover:text-[color:var(--accent)] transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-slate-300 hover:text-[color:var(--accent)] transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-slate-300 hover:text-[color:var(--accent)] transition"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-slate-400 mt-6 border-t border-slate-700 pt-6">© 2025 Xharlez Xpressions. All rights reserved.</div>
+    </footer>
+
+    <!-- Bootstrap JS + Shop JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/shop.js"></script>
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+        }
+
+        // Fade-in on scroll
+        const faders = document.querySelectorAll('.fade-in');
+        const io = new IntersectionObserver((entries, o) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('visible');
+                    o.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        faders.forEach(f => io.observe(f));
+    </script>
+</body>
+</html>

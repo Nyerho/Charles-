@@ -1,0 +1,124 @@
+:root {
+    --accent: #0ea5a4;
+    --accent-dark: #0b8c8b;
+    --muted: #94a3b8;
+    --dark: #0f172a;
+    --light: #f8fafc;
+}
+
+body {
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Montserrat", sans-serif;
+}
+
+.text-accent {
+    color: var(--accent) !important;
+}
+
+.bg-accent {
+    background-color: var(--accent) !important;
+}
+
+.btn-accent {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+    background-color: var(--accent-dark);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(14, 165, 164, 0.3);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #334155;
+    transition: color 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--accent);
+}
+
+/* Hero Section */
+.hero-section {
+    background: url('images/services/creative/photo2.jpg') no-repeat center center/cover;
+    height: 80vh;
+    min-height: 500px;
+    position: relative;
+    margin-top: 56px; /* Offset for fixed navbar */
+}
+
+.hero-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.5));
+}
+
+/* Hover Effects */
+.hover-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important;
+}
+
+.icon-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-green-light { background-color: rgba(25, 135, 84, 0.1); }
+.bg-purple-light { background-color: rgba(13, 110, 253, 0.1); }
+.bg-orange-light { background-color: rgba(255, 193, 7, 0.1); }
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.hover-white:hover {
+    color: white !important;
+}
+
+/* Form Styling */
+.form-control:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.25rem rgba(14, 165, 164, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .hero-section {
+        height: 60vh;
+    }
+    .display-3 {
+        font-size: 2.5rem;
+    }
+}
