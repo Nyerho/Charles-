@@ -164,15 +164,42 @@
     
         console.log('Checkout Payload:', payload);
 
-        // Simulate API call
+        // Real Checkout: Redirect to WhatsApp
         try {
-            // Mock delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            const orderId = `ORD-${Date.now()}`;
+            let message = `*New Order: ${orderId}*\n`;
+            message += `------------------------\n`;
+            message += `*Customer Details:*\n`;
+            message += `Name: ${recipient.name}\n`;
+            message += `Email: ${recipient.email}\n`;
+            message += `Phone: ${recipient.phone}\n`;
+            message += `Address: ${recipient.address1}, ${recipient.address2 ? recipient.address2 + ', ' : ''}${recipient.city}, ${recipient.state_code}, ${recipient.country_code}, ${recipient.zip}\n\n`;
             
-            // In a real app, you'd fetch('/api/printful/checkout') here.
-            // For now, we simulate success.
+            message += `*Order Items:*\n`;
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+                message += `- ${item.title} (${item.variant_label}) x${item.qty} - $${itemTotal.toFixed(2)}\n`;
+            });
             
-            alert('Order placed successfully! (Demo Mode)');
+            message += `\n*Total:* $${total.toFixed(2)}\n`;
+            
+            const notes = document.getElementById('orderNotes').value.trim();
+            if (notes) {
+                message += `\n*Notes:* ${notes}\n`;
+            }
+            message += `------------------------\n`;
+            message += `Please confirm my order and provide payment details.`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappNumber = "2347049538147"; 
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            alert('Redirecting to WhatsApp to complete your order...');
+            window.open(whatsappUrl, '_blank');
+            
+            // Clear cart and reset form
             cart = [];
             saveCart();
             renderCart();
@@ -181,7 +208,6 @@
             const detailsModal = bootstrap.Modal.getInstance(detailsModalEl) || new bootstrap.Modal(detailsModalEl);
             detailsModal.hide();
             
-            // Also close cart modal if open (though bootstrap might handle swapping)
             const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
             if(cartModal) cartModal.hide();
 
