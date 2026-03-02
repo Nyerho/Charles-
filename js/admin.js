@@ -149,8 +149,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     ];
 
-    // Load Local Products
+    // Load Local Data
     let localProducts = JSON.parse(localStorage.getItem('admin_products')) || [];
+    let localOrders = JSON.parse(localStorage.getItem('admin_orders')) || [];
+
+    // Update Badge
+    function updateBadge() {
+        const badge = document.getElementById('pendingBadge');
+        const pendingCount = localOrders.filter(o => o.status === 'Pending').length;
+        if (badge) {
+            badge.innerText = pendingCount;
+            badge.style.display = pendingCount > 0 ? 'inline-block' : 'none';
+        }
+    }
+    updateBadge();
 
     // Login Handler
     if (localStorage.getItem('adminLoggedIn') === 'true') {
@@ -196,12 +208,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // View Loader
     function loadView(viewName) {
         mainContent.innerHTML = '';
+        updateBadge();
         switch(viewName) {
             case 'dashboard':
                 renderDashboard();
                 break;
             case 'products':
                 renderProducts();
+                break;
+            case 'orders':
+                renderOrders();
                 break;
             case 'donations':
                 renderDonations();
@@ -217,6 +233,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Render Functions
     function renderDashboard() {
+        const pendingCount = localOrders.filter(o => o.status === 'Pending').length;
+        
         mainContent.innerHTML = `
             <h2 class="mb-4">Dashboard Overview</h2>
             <div class="row g-4">
@@ -234,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="col-md-3">
                     <div class="card card-dashboard p-3 bg-warning text-dark">
-                        <h3>0</h3>
+                        <h3>${pendingCount}</h3>
                         <p>Pending Orders</p>
                     </div>
                 </div>
@@ -249,15 +267,117 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="row mt-5">
                 <div class="col-md-8">
                     <div class="card shadow-sm">
-                        <div class="card-header bg-white fw-bold">Recent Activity</div>
+                        <div class="card-header bg-white fw-bold">Recent Orders</div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item text-muted text-center py-4">No recent activity found.</li>
+                            ${localOrders.slice(-5).reverse().map(o => `
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>${o.id}</strong> - ${o.customer.name}
+                                        <br><small class="text-muted">${new Date(o.date).toLocaleString()}</small>
+                                    </div>
+                                    <span class="badge bg-${o.status === 'Pending' ? 'warning' : o.status === 'Completed' ? 'success' : 'danger'}">${o.status}</span>
+                                </li>
+                            `).join('') || '<li class="list-group-item text-muted text-center py-4">No recent orders found.</li>'}
                         </ul>
                     </div>
                 </div>
             </div>
         `;
     }
+
+    function renderOrders() {
+        let html = `
+            <h2 class="mb-4">Order Management</h2>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        if (localOrders.length === 0) {
+            html += `<tr><td colspan="7" class="text-center text-muted py-5">No orders found.</td></tr>`;
+        } else {
+            // Sort by date desc
+            localOrders.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(order => {
+                const itemsSummary = order.items.map(i => `${i.qty}x ${i.title}`).join(', ');
+                html += `
+                    <tr>
+                        <td><strong>${order.id}</strong></td>
+                        <td>${new Date(order.date).toLocaleDateString()}</td>
+                        <td>
+                            ${order.customer.name}<br>
+                            <small class="text-muted">${order.customer.phone}</small>
+                        </td>
+                        <td>
+                            <span class="d-inline-block text-truncate" style="max-width: 200px;" title="${itemsSummary}">
+                                ${itemsSummary}
+                            </span>
+                        </td>
+                        <td>₦${order.total.toLocaleString()}</td>
+                        <td>
+                            <span class="badge bg-${order.status === 'Pending' ? 'warning' : order.status === 'Completed' ? 'success' : 'danger'}">${order.status}</span>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-success" onclick="updateOrderStatus('${order.id}', 'Completed')" title="Mark Completed"><i class="fas fa-check"></i></button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="updateOrderStatus('${order.id}', 'Cancelled')" title="Cancel Order"><i class="fas fa-times"></i></button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="viewOrderDetails('${order.id}')" title="View Details"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        html += `</tbody></table></div>`;
+        mainContent.innerHTML = html;
+    }
+
+    window.updateOrderStatus = function(id, status) {
+        const orderIndex = localOrders.findIndex(o => o.id === id);
+        if (orderIndex > -1) {
+            if (confirm(`Mark order ${id} as ${status}?`)) {
+                localOrders[orderIndex].status = status;
+                localStorage.setItem('admin_orders', JSON.stringify(localOrders));
+                renderOrders();
+                updateBadge();
+            }
+        }
+    };
+
+    window.viewOrderDetails = function(id) {
+        const order = localOrders.find(o => o.id === id);
+        if (!order) return;
+
+        const details = `
+            Order ID: ${order.id}
+            Date: ${new Date(order.date).toLocaleString()}
+            Status: ${order.status}
+            
+            Customer:
+            Name: ${order.customer.name}
+            Email: ${order.customer.email}
+            Phone: ${order.customer.phone}
+            Address: ${order.customer.address1}, ${order.customer.city}
+            
+            Items:
+            ${order.items.map(i => `- ${i.title} (${i.variant}) x${i.qty} = ₦${i.total.toLocaleString()}`).join('\n')}
+            
+            Total: ₦${order.total.toLocaleString()}
+            Notes: ${order.notes || 'None'}
+        `;
+        alert(details);
+    };
 
     function renderProducts() {
         const allProducts = [...existingProducts, ...localProducts];

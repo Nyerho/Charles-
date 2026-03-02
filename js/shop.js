@@ -196,6 +196,27 @@
             const whatsappNumber = "2347049538147"; 
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
+            // Save Order for Admin Panel
+            const newOrder = {
+                id: orderId,
+                date: new Date().toISOString(),
+                customer: recipient,
+                items: cart.map(i => ({
+                    title: i.title,
+                    variant: i.variant_label,
+                    qty: i.qty,
+                    price: i.price,
+                    total: i.price * i.qty
+                })),
+                total: total,
+                status: 'Pending', // Pending, Completed, Cancelled
+                notes: notes
+            };
+
+            const existingOrders = JSON.parse(localStorage.getItem('admin_orders')) || [];
+            existingOrders.push(newOrder);
+            localStorage.setItem('admin_orders', JSON.stringify(existingOrders));
+
             alert('Redirecting to WhatsApp to complete your order...');
             window.open(whatsappUrl, '_blank');
             
