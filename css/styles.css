@@ -171,6 +171,25 @@ body {
   justify-content: center;
 }
 
+.site-hero-bg {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.site-hero-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.site-hero-bg > * {
+    position: relative;
+    z-index: 1;
+}
+
 
 /* Hero Background Image */
 .hero-background {

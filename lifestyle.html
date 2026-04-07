@@ -30,6 +30,9 @@
     .hover-scale:hover { transform: scale(1.05); transition: transform 0.3s ease-in-out; }
     .btn-glow:hover { box-shadow: 0 0 20px rgba(14, 165, 164, 0.5); transform: translateY(-2px); transition: all 0.3s ease-in-out; }
     .carousel::-webkit-scrollbar { display: none; }
+    .hero-bg { position: relative; background-size: cover; background-position: center; background-repeat: no-repeat; }
+    .hero-bg::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+    .hero-bg > * { position: relative; z-index: 1; }
     /* Mobile menu animation */
     #mobileMenu { top: 100%; left: 0; width: 100%; background: rgba(234, 240, 240, 0.507); backdrop-filter: blur(200px); border-bottom-left-radius: 0.75rem; border-bottom-right-radius: 0.75rem; overflow: hidden; max-height: 0; transition: max-height 0.5s ease; z-index: 50; }
     #mobileMenu.open { max-height: 1000px; }
@@ -99,27 +102,27 @@ mobileBtn.addEventListener("click", () => mobileMenu.classList.toggle("open"));
 
 <main class="pt-6">
 <!-- HERO SECTION -->
-<section class="min-h-[60vh] bg-gradient-to-b from-slate-50 to-white flex items-center justify-center">
+<section class="min-h-[60vh] hero-bg flex items-center justify-center text-white" style="background-image: url('./images/home%20decor.jpg');">
   <div class="max-w-4xl mx-auto px-4 text-center py-16">
     <div class="mb-3">
-      <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm inline-flex items-center gap-2">
+      <span class="px-3 py-1 rounded-full bg-white/20 text-white text-sm inline-flex items-center gap-2">
         <i class="fas fa-home text-[color:var(--accent)]"></i> Lifestyle Excellence
       </span>
     </div>
     <h1 class="text-4xl font-extrabold mb-4">Xpressions Lifestyle</h1>
-    <p class="text-lg text-slate-600 mb-8">Elevate your everyday life with our premium lifestyle services. From professional laundry care to stunning home decor and event styling.</p>
+    <p class="text-lg text-white/80 mb-8">Elevate your everyday life with our premium lifestyle services. From professional laundry care to stunning home decor and event styling.</p>
     <div class="grid grid-cols-3 gap-4 text-center">
       <div>
         <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="2000" data-suffix="+">0</div>
-        <div class="text-sm text-slate-500">Satisfied Clients</div>
+        <div class="text-sm text-white/70">Satisfied Clients</div>
       </div>
       <div>
         <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="24" data-suffix="/7">0</div>
-        <div class="text-sm text-slate-500">Service Available</div>
+        <div class="text-sm text-white/70">Service Available</div>
       </div>
       <div>
         <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="99" data-suffix="%">0</div>
-        <div class="text-sm text-slate-500">Quality Guarantee</div>
+        <div class="text-sm text-white/70">Quality Guarantee</div>
       </div>
     </div>
   </div>

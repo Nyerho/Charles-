@@ -41,6 +41,24 @@
     .fade-in { opacity: 0; transform: translateY(18px); transition: all .75s cubic-bezier(.2,.9,.2,1); }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+    .landing-hero-bg{
+      position: relative;
+      background-image: url("./images/landing%20bc.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .landing-hero-bg::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,0.55);
+    }
+    .landing-hero-bg > *{
+      position: relative;
+      z-index: 1;
+    }
+
     /* Carousel */
     .carousel { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; overflow-x:auto; display:flex; gap:1rem; padding-bottom:0.5rem; scroll-behavior: smooth; }
     .carousel > .item { flex: 0 0 100%; scroll-snap-align:center; }
@@ -191,7 +209,7 @@
 
 <main id="home" class="pt-6">
   <!-- HERO SECTION -->
-  <section class="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 fade-in">
+  <section class="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 fade-in landing-hero-bg">
     <span class="px-3 py-1 rounded-full bg-[#071024] text-[color:var(--accent)] inline-flex items-center gap-2 mb-3">🎯 Excellence • Innovation • Empowerment</span>
 
     <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">

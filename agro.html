@@ -24,6 +24,9 @@ body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica 
 .btn-glow:hover{box-shadow:0 0 20px rgba(14,165,164,0.5);transform: translateY(-2px);transition: all 0.3s ease-in-out;}
 .fade-in{opacity:0;transform: translateY(20px);transition: all 0.8s ease-out;}
 .fade-in.visible{opacity:1;transform: translateY(0);}
+.hero-bg{position:relative;background-size:cover;background-position:center;background-repeat:no-repeat;}
+.hero-bg::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.55);}
+.hero-bg>*{position:relative;z-index:1;}
 
 .carousel{scroll-snap-type: x mandatory;-webkit-overflow-scrolling: touch;overflow-x:auto;display:flex;gap:1rem;padding-bottom:0.5rem;scroll-behavior: smooth;}
 .carousel>.item{flex:0 0 100%;scroll-snap-align:center;}
@@ -96,31 +99,31 @@ details[open] summary i{transform: rotate(180deg);transition: transform 0.3s;}
 <main class="pt-6">
 <!-- HERO SECTION -->
  
-<section class="min-h-[60vh] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 to-white fade-in">
+<section class="min-h-[60vh] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 fade-in hero-bg text-white" style="background-image:url('./images/weeding11.jpg');">
   <div class="max-w-4xl mx-auto">
     
     <div class="mb-4 flex justify-center">
-      <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm inline-flex items-center gap-2" style="margin-top: 30px; margin-bottom: -15px;">
+      <span class="px-3 py-1 rounded-full bg-white/20 text-white text-sm inline-flex items-center gap-2" style="margin-top: 30px; margin-bottom: -15px;">
         <i class="fas fa-palette text-[color:var(--accent)]"></i> Agricultural Excellence
       </span>
     </div>
 
     <h1 class="text-4xl font-extrabold mb-3">Xpressions <span class="text-[color:var(--accent)]">Agro</span></h1>
     
-    <p class="text-lg text-slate-600 mb-6">Sustainable farming solutions that nurture crops and communities while protecting our environment.</p>
+    <p class="text-lg text-white/80 mb-6">Sustainable farming solutions that nurture crops and communities while protecting our environment.</p>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
       <div>
         <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="200" data-suffix="+">0</div>
-        <div class="text-sm text-slate-500">Farmers Trained</div>
+        <div class="text-sm text-white/70">Farmers Trained</div>
       </div>
       <div>
         <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="95" data-suffix="%">0</div>
-        <div class="text-sm text-slate-500">Waste Reduction</div>
+        <div class="text-sm text-white/70">Waste Reduction</div>
       </div>
       <div>
         <div class="text-2xl font-bold text-[color:var(--accent)] counter" data-target="100" data-suffix="+">0</div>
-        <div class="text-sm text-slate-500">Organic Methods</div>
+        <div class="text-sm text-white/70">Organic Methods</div>
       </div>
     </div>
 
@@ -130,7 +133,6 @@ details[open] summary i{transform: rotate(180deg);transition: transform 0.3s;}
     </div>
 
   </div>
-</section>
 </section>
 
 <!-- SERVICES SECTION -->
