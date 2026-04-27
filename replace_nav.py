@@ -31,7 +31,7 @@ new_header = """<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md sh
           <ul class="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all backdrop-blur-lg list-none p-0 border border-slate-100">
             <li><a href="creative.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">Xpressions Creative</a></li>
             <li><a href="lifestyle.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">Xpressions Lifestyle</a></li>
-            <li><a href="agro.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">Xpressions Agro</a></li>
+            <li><a href="bloomfieldindex.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">BloomGreen</a></li>
             <li><a href="logistics.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">Xpressions Logistics</a></li>
             <li><a href="xpressionsnation.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">XpressionsNation (NGO)</a></li>
             <li><a href="shop.html" class="block px-4 py-2 hover:bg-slate-100 text-decoration-none text-slate-700">Xpressions Shop</a></li>          
@@ -71,7 +71,7 @@ new_header = """<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md sh
           <div class="mt-2 pl-4 space-y-2 border-l-2 border-slate-100">
             <a href="creative.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">Xpressions Creative</a>
             <a href="lifestyle.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">Xpressions Lifestyle</a>
-            <a href="agro.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">Xpressions Agro</a>
+            <a href="bloomfieldindex.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">BloomGreen</a>
             <a href="logistics.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">Xpressions Logistics</a>
             <a href="xpressionsnation.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">XpressionsNation (NGO)</a>
             <a href="shop.html" class="text-decoration-none text-slate-600 hover:text-[color:var(--accent)] block">Xpressions Shop</a>
